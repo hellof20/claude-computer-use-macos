@@ -28,7 +28,8 @@ View Anthropic's docs [here](https://docs.anthropic.com/en/docs/build-with-claud
 3. **Set your Anthropic API key as an environment variable:**
 
    ```bash
-   export ANTHROPIC_API_KEY="CLAUDE_API_KEY"
+   export ANTHROPIC_VERTEX_PROJECT_ID=speedy-victory-336109
+   export CLOUD_ML_REGION=us-east5
    ```
 
    Replace `CLAUDE_API_KEY` with your actual Anthropic API key. You find yours [here](https://console.anthropic.com/settings/keys).
