@@ -13,7 +13,7 @@ View Anthropic's docs [here](https://docs.anthropic.com/en/docs/build-with-claud
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/PallavAg/claude-computer-use-macos.git
+   git clone https://github.com/hellof20/claude-computer-use-macos.git
    cd claude-computer-use-macos
    ```
 
@@ -31,8 +31,6 @@ View Anthropic's docs [here](https://docs.anthropic.com/en/docs/build-with-claud
    export ANTHROPIC_VERTEX_PROJECT_ID=speedy-victory-336109
    export CLOUD_ML_REGION=us-east5
    ```
-
-   Replace `CLAUDE_API_KEY` with your actual Anthropic API key. You find yours [here](https://console.anthropic.com/settings/keys).
 
 4. **Grant Accessibility Permissions:**
 
