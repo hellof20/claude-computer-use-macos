@@ -8,16 +8,28 @@ from computer_use_demo.loop import sampling_loop, APIProvider
 from computer_use_demo.tools import ToolResult
 from anthropic.types.beta import BetaMessage, BetaMessageParam
 from anthropic import APIResponse
-
+import google.auth
+from google.auth.exceptions import DefaultCredentialsError
 
 async def main():
     # Set up your Anthropic API key and model
-    api_key = os.getenv("ANTHROPIC_API_KEY", "YOUR_API_KEY_HERE")
-    if api_key == "YOUR_API_KEY_HERE":
-        raise ValueError(
-            "Please first set your API key in the ANTHROPIC_API_KEY environment variable"
+    # api_key = os.getenv("ANTHROPIC_API_KEY", "YOUR_API_KEY_HERE")
+    # if api_key == "YOUR_API_KEY_HERE":
+    #     raise ValueError(
+    #         "Please first set your API key in the ANTHROPIC_API_KEY environment variable"
+    #     )
+    # provider = APIProvider.ANTHROPIC
+
+    provider = APIProvider.VERTEX
+
+    # if not os.environ.get("CLOUD_ML_REGION"):
+    #     return "Set the CLOUD_ML_REGION environment variable to use the Vertex API."
+    try:
+        google.auth.default(
+            scopes=["https://www.googleapis.com/auth/cloud-platform"],
         )
-    provider = APIProvider.ANTHROPIC
+    except DefaultCredentialsError:
+        return "Your google cloud credentials are not set up correctly."
 
     # Check if the instruction is provided via command line arguments
     if len(sys.argv) > 1:
@@ -64,14 +76,14 @@ async def main():
 
     # Run the sampling loop
     messages = await sampling_loop(
-        model="claude-3-5-sonnet-20241022",
+        model="claude-3-5-sonnet-v2@20241022",
         provider=provider,
         system_prompt_suffix="",
         messages=messages,
         output_callback=output_callback,
         tool_output_callback=tool_output_callback,
         api_response_callback=api_response_callback,
-        api_key=api_key,
+        api_key='',
         only_n_most_recent_images=10,
         max_tokens=4096,
     )
